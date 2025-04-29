@@ -14,8 +14,16 @@ class Game extends JPanel implements MouseListener {
     private ArrayList<Card> deck;
     private ArrayList<Card> field;
     private Rectangle button;
+    private Rectangle button2;
+    private Rectangle button3;
+    private Rectangle button4;
 
     public Game(){
+        button = new Rectangle(50, 400, 80, 26);
+        button2 = new Rectangle(150, 400, 80,26);
+        button3 = new Rectangle(250, 400, 80,26);
+        button4 = new Rectangle(350, 400, 80,26);
+        this.addMouseListener(this);
         deck = Card.buildDeck();
         hand = new ArrayList<>();
         field = new ArrayList<>();
@@ -54,10 +62,22 @@ class Game extends JPanel implements MouseListener {
                 y += cardHeight + 10;
             }
         }
+        g.setFont(new Font("Courier New", Font.BOLD, 20));
+        g.drawString("Check", 60, 420);
+        g.drawRect((int)button.getX(), (int)button.getY(), (int)button.getWidth(), (int)button.getHeight());
+        g.setFont(new Font("Courier New", Font.BOLD, 20));
+        g.drawString("Fold", 160, 420);
+        g.drawRect((int)button2.getX(), (int)button2.getY(), (int)button2.getWidth(), (int)button2.getHeight());
+        g.drawString("Pot", 260, 420);
+        g.drawRect((int)button3.getX(), (int)button3.getY(), (int)button3.getWidth(), (int)button3.getHeight());
+        g.drawString(String.format("%d\n---\n%d",1,2), 360, 420);
+        g.drawRect((int)button4.getX(), (int)button4.getY(), (int)button4.getWidth(), (int)button4.getHeight());
+
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        Point click = e.getPoint();
 
     }
 
