@@ -13,10 +13,12 @@ class Game extends JPanel implements MouseListener {
     private ArrayList<Card> hand;
     private ArrayList<Card> deck;
     private ArrayList<Card> field;
+    private ArrayList<Card> allCards;
     private Rectangle button;
     private Rectangle button2;
     private Rectangle button3;
     private Rectangle button4;
+
 
     public Game(){
         button = new Rectangle(50, 400, 80, 26);
@@ -26,6 +28,7 @@ class Game extends JPanel implements MouseListener {
         this.addMouseListener(this);
         deck = Card.buildDeck();
         hand = new ArrayList<>();
+        allCards = new ArrayList<>();
         field = new ArrayList<>();
         placeField();
     }
@@ -39,6 +42,14 @@ class Game extends JPanel implements MouseListener {
             int r = (int)(Math.random()*deck.size());
             Card c = deck.remove(r);
             field.add(c);
+        }
+    }
+    public void setAllCards(){
+        for (Card card : hand){
+            allCards.add(card);
+        }
+        for(Card card : field){
+            allCards.add(card);
         }
     }
 
@@ -74,6 +85,45 @@ class Game extends JPanel implements MouseListener {
         g.drawRect((int)button4.getX(), (int)button4.getY(), (int)button4.getWidth(), (int)button4.getHeight());
 
     }
+
+    public static int getValue(String card) {
+        if (card.equals("A")) {
+            return 14;
+        }
+        if (card.equals("K")) return 13;
+        if (card.equals("Q")) return 12;
+        if (card.equals("J")) return 11;
+        return Integer.parseInt(card);
+    }
+
+
+    public boolean checkIfAllSameSuit(){
+        int spades = 0;
+        int diamonds = 0;
+        int hearts = 0;
+        int clubs = 0;
+        ArrayList<String> types = new ArrayList<>();
+        for (Card card:allCards){
+            types.add(card.getSuit());
+        }
+        for (String type : types){
+            if(type.equals("spades")) spades++;
+            if(type.equals("diamonds")) diamonds++;
+            if(type.equals("hearts")) hearts++;
+            if(type.equals("clubs")) clubs++;
+        }
+        if (spades == 5) return true;
+        if (diamonds == 5) return true;
+        if (hearts == 5) return true;
+        if (clubs == 5) return true;
+        return false;
+        }
+    }
+//    public boolean royalFlush(){
+//
+//        if
+//    }
+//
 
     @Override
     public void mouseClicked(MouseEvent e) {
