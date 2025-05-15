@@ -3,10 +3,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.awt.Font;
-import java.awt.Color;
 
 class Game extends JPanel implements MouseListener {
 
@@ -97,13 +95,13 @@ class Game extends JPanel implements MouseListener {
     }
 
 
-    public boolean checkIfAllSameSuit(){
+    public boolean flush(ArrayList<Card> cards){
         int spades = 0;
         int diamonds = 0;
         int hearts = 0;
         int clubs = 0;
         ArrayList<String> types = new ArrayList<>();
-        for (Card card:allCards){
+        for (Card card:cards){
             types.add(card.getSuit());
         }
         for (String type : types){
@@ -117,17 +115,150 @@ class Game extends JPanel implements MouseListener {
         if (hearts == 5) return true;
         if (clubs == 5) return true;
         return false;
-        }
     }
-//    public boolean royalFlush(){
+
+    public boolean royalFlush(ArrayList<Card> cards){
+        int count = 0;
+        ArrayList<String> values = new ArrayList<>();
+        for (Card card : cards){
+            values.add(card.getValue());
+        }
+        for (String value : values){
+            if(value.equals("A")) count++;
+            if(value.equals("K")) count++;
+            if(value.equals("Q")) count++;
+            if(value.equals("J")) count++;
+            if(value.equals("10")) count++;
+        }
+        if (flush(cards) && count == 5){
+        }
+        return false;
+    }
+
+    public boolean fourOfKind(ArrayList<Card> cards){
+        int spades = 0;
+        int diamonds = 0;
+        int hearts = 0;
+        int clubs = 0;
+        ArrayList<String> types = new ArrayList<>();
+        for (Card card:cards){
+            types.add(card.getSuit());
+        }
+        for (String type : types){
+            if(type.equals("spades")) spades++;
+            if(type.equals("diamonds")) diamonds++;
+            if(type.equals("hearts")) hearts++;
+            if(type.equals("clubs")) clubs++;
+        }
+        if (spades == 4) return true;
+        if (diamonds == 4) return true;
+        if (hearts == 4) return true;
+        if (clubs == 4) return true;
+        return false;
+    }
+
+    public boolean threeOfKind(ArrayList<Card> cards){
+        int spades = 0;
+        int diamonds = 0;
+        int hearts = 0;
+        int clubs = 0;
+        ArrayList<String> types = new ArrayList<>();
+        for (Card card:cards){
+            types.add(card.getSuit());
+        }
+        for (String type : types){
+            if(type.equals("spades")) spades++;
+            if(type.equals("diamonds")) diamonds++;
+            if(type.equals("hearts")) hearts++;
+            if(type.equals("clubs")) clubs++;
+        }
+        if (spades == 3) return true;
+        if (diamonds == 3) return true;
+        if (hearts == 3) return true;
+        if (clubs == 3) return true;
+        return false;
+    }
+
+    public boolean pair(ArrayList<Card> cards){
+        int spades = 0;
+        int diamonds = 0;
+        int hearts = 0;
+        int clubs = 0;
+        ArrayList<String> types = new ArrayList<>();
+        for (Card card:cards){
+            types.add(card.getSuit());
+        }
+        for (String type : types){
+            if(type.equals("spades")) spades++;
+            if(type.equals("diamonds")) diamonds++;
+            if(type.equals("hearts")) hearts++;
+            if(type.equals("clubs")) clubs++;
+        }
+        if (spades == 2) return true;
+        if (diamonds == 2) return true;
+        if (hearts == 2) return true;
+        if (clubs == 2) return true;
+        return false;
+    }
+
+    public void removeThreeOfKind(ArrayList<Card> cards){
+        int spades = 0;
+        int diamonds = 0;
+        int hearts = 0;
+        int clubs = 0;
+        ArrayList<String> types = new ArrayList<>();
+        for (Card card:cards){
+            types.add(card.getSuit());
+        }
+        for (int i = 0; i < types.size(); i++){
+            if (types.get(i).equals("spades")) spades++;
+            if (types.get(i).equals("diamonds")) diamonds++;
+            if (types.get(i).equals("hearts")) hearts++;
+            if (types.get(i).equals("clubs")) clubs++;
+
+            if(spades == 3 && threeOfKind(cards)){
+                types.remove(spades);
+            }
+            else if(diamonds == 3)
+            {
+
+            }
+            else if(hearts == 3){
+
+            }
+            else if (clubs == 3){
+
+            }
+
+
+        }
+//        for (String type : types){
+//            if(type.equals("spades")) spades++;
+//            if(type.equals("diamonds")) diamonds++;
+//            if(type.equals("hearts")) hearts++;
+//            if(type.equals("clubs")) clubs++;
+//        }
+    }
+//    public boolean fullHouse(ArrayList<Card> cards){
 //
-//        if
 //    }
+
+
+//    public boolean twoPair(ArrayList<Card> cards){
 //
+//    }
+
+//    public boolean straightFlush(ArrayList<Card> cards){
+//
+//    }
+
+
+//    public boolean highcard(ArrayList<Card> cards){
+//
+//    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Point click = e.getPoint();
 
     }
 
@@ -151,3 +282,4 @@ class Game extends JPanel implements MouseListener {
 
     }
 }
+
