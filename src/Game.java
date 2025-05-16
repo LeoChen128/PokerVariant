@@ -84,17 +84,6 @@ class Game extends JPanel implements MouseListener {
 
     }
 
-    public static int getValue(String card) {
-        if (card.equals("A")) {
-            return 14;
-        }
-        if (card.equals("K")) return 13;
-        if (card.equals("Q")) return 12;
-        if (card.equals("J")) return 11;
-        return Integer.parseInt(card);
-    }
-
-
     public boolean flush(ArrayList<Card> cards){
         int spades = 0;
         int diamonds = 0;
@@ -119,18 +108,19 @@ class Game extends JPanel implements MouseListener {
 
     public boolean royalFlush(ArrayList<Card> cards){
         int count = 0;
-        ArrayList<String> values = new ArrayList<>();
+        ArrayList<Integer> values = new ArrayList<>();
         for (Card card : cards){
-            values.add(card.getValue());
+            values.add(card.getNumericalValue());
         }
-        for (String value : values){
-            if(value.equals("A")) count++;
-            if(value.equals("K")) count++;
-            if(value.equals("Q")) count++;
-            if(value.equals("J")) count++;
-            if(value.equals("10")) count++;
+        for (Integer value : values){
+            if(value == 14) count++;
+            if(value == 13) count++;
+            if(value == 12) count++;
+            if(value == 11) count++;
+            if(value == 10) count++;
         }
         if (flush(cards) && count == 5){
+            return true;
         }
         return false;
     }
@@ -217,17 +207,17 @@ class Game extends JPanel implements MouseListener {
             if (types.get(i).equals("clubs")) clubs++;
 
             if(spades == 3 && threeOfKind(cards)){
-                types.remove(spades);
+                types.remove(types.get(i));
             }
-            else if(diamonds == 3)
+            else if(diamonds == 3 && threeOfKind(cards))
             {
-
+                types.remove(types.get(i));
             }
-            else if(hearts == 3){
-
+            else if(hearts == 3 && threeOfKind(cards)){
+                types.remove(types.get(i));
             }
             else if (clubs == 3){
-
+                types.remove(types.get(i));
             }
 
 
@@ -252,10 +242,44 @@ class Game extends JPanel implements MouseListener {
 //
 //    }
 
+    public void removeDuplicates(ArrayList<Card> cards){
+        ArrayList<Integer> numberCards = new ArrayList<>();
+        for (Card card : cards){
+            numberCards.add(card.getNumericalValue());
+        }
+        for (int i = 0; i < numberCards.size();i++){
 
-//    public boolean highcard(ArrayList<Card> cards){
-//
-//    }
+        }
+    }
+
+    public int result(){
+        if (royalFlush(allCards)) return 10;
+        //if (straightFLush(allCards)) return 9;
+        if (fourOfKind(allCards)) return 8;
+//        if (fullHouse(allCards)) return 7;
+        if (flush(allCards)) return 6;
+//        if (straight(allCards)) return 5;
+        if (threeOfKind(allCards)) return 4;
+//        if (twoPair(allCards)) return 3;
+        if (pair(allCards)) return 2;
+        return 1;
+    }
+
+
+    public Integer highcard(ArrayList<Card> cards){
+        int highestValue = 0;
+        ArrayList<Integer> values = new ArrayList<>();
+        for (Card card : cards){
+            values.add(card.getNumericalValue());
+        }
+        for (Integer value : values){
+            if(value == 14) highestValue = 14;
+            if(value == 13) highestValue = 13;
+            if(value == 12) highestValue = 12;
+            if(value == 11) highestValue = 11;
+        }
+        return highestValue;
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {

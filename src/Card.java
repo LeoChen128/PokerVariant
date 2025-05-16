@@ -43,8 +43,10 @@ public class Card {
     }
 
     public int getNumericalValue() {
-        if (value.equals("A")) return 1;
-        if (value.equals("J") || value.equals("Q") || value.equals("K")) return 0;
+        if (value.equals("A")) return 14;
+        if (value.equals("K")) return 13;
+        if (value.equals("Q")) return 12;
+        if (value.equals("J")) return 11;
         return Integer.parseInt(value);
     }
 
