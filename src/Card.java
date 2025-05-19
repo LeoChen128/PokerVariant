@@ -13,7 +13,6 @@ public class Card {
     private boolean show;
     private BufferedImage image;
     private Rectangle cardBox;
-    private boolean highlight;
 
     public Card(String suit, String value) {
         this.suit = suit;
@@ -23,7 +22,6 @@ public class Card {
         this.backImageFileName = "images/card_back.png";
         this.image = readImage();
         this.cardBox = new Rectangle(-100, -100, image.getWidth(), image.getHeight());
-        this.highlight = false;
     }
 
     public Rectangle getCardBox() {

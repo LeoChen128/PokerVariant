@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.awt.Font;
 
-class Game extends JPanel implements MouseListener {
+public class Game extends JPanel implements MouseListener {
 
     private ArrayList<Card> hand;
     private ArrayList<Card> deck;
@@ -16,6 +16,8 @@ class Game extends JPanel implements MouseListener {
     private Rectangle button2;
     private Rectangle button3;
     private Rectangle button4;
+
+
 
 
     public Game(){
@@ -50,7 +52,10 @@ class Game extends JPanel implements MouseListener {
             allCards.add(card);
         }
     }
-
+    public int getDiameter(){
+        int diameter = Math.min(getWidth(), getHeight());
+        return diameter;
+    }
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         int cardWidth = 71;
@@ -79,9 +84,14 @@ class Game extends JPanel implements MouseListener {
         g.drawRect((int)button2.getX(), (int)button2.getY(), (int)button2.getWidth(), (int)button2.getHeight());
         g.drawString("Pot", 260, 420);
         g.drawRect((int)button3.getX(), (int)button3.getY(), (int)button3.getWidth(), (int)button3.getHeight());
-        g.drawString(String.format("%d\n---\n%d",1,2), 360, 420);
+        g.drawString("1/2", 360, 420);
         g.drawRect((int)button4.getX(), (int)button4.getY(), (int)button4.getWidth(), (int)button4.getHeight());
 
+        g.drawString("1",110,325);
+        g.drawOval(100,300,30,30);
+
+        g.drawString("5",155, 325);
+        g.drawOval(140,300,40,40);
     }
 
     public boolean flush(ArrayList<Card> cards){
