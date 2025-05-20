@@ -1,9 +1,14 @@
 
 public class Balance{
+
     private int balance;
 
     public Balance(){
         this.balance = 10000;
+    }
+
+    public int getBalance() {
+        return balance;
     }
 
     public void whiteChip(){

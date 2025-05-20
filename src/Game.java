@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.awt.Font;
+import java.awt.geom.Ellipse2D;
 
 public class Game extends JPanel implements MouseListener {
 
@@ -16,15 +17,28 @@ public class Game extends JPanel implements MouseListener {
     private Rectangle button2;
     private Rectangle button3;
     private Rectangle button4;
-
-
-
+    private ArrayList<Chips> chips;
+    private Ellipse2D chip1;
+    private Ellipse2D chip2;
+    private Ellipse2D chip3;
+    private Ellipse2D chip4;
+    private Ellipse2D chip5;
+    private Ellipse2D chip6;
+    private Ellipse2D chip7;
 
     public Game(){
         button = new Rectangle(50, 400, 80, 26);
         button2 = new Rectangle(150, 400, 80,26);
         button3 = new Rectangle(250, 400, 80,26);
         button4 = new Rectangle(350, 400, 80,26);
+        chip1 = new Ellipse2D.Double(100,300,30,30);
+        chip2 = new Ellipse2D.Double(140,300,30,30);
+        chip3 = new Ellipse2D.Double(180,300,30,30);
+        chip4 = new Ellipse2D.Double(220,300,30,30);
+        chip5 = new Ellipse2D.Double(260,300,30,30);
+        chip6 = new Ellipse2D.Double(300,300,30,30);
+        chip7 = new Ellipse2D.Double(340,300,30,30);
+        chips = new ArrayList<>();
         this.addMouseListener(this);
         deck = Card.buildDeck();
         hand = new ArrayList<>();
@@ -35,6 +49,7 @@ public class Game extends JPanel implements MouseListener {
 
     public void placeField(){
         field.clear();
+        chips.clear();
         for (int i = 0; i < 5; i++) {
             if (deck.isEmpty()){
                 break;
@@ -42,6 +57,9 @@ public class Game extends JPanel implements MouseListener {
             int r = (int)(Math.random()*deck.size());
             Card c = deck.remove(r);
             field.add(c);
+        }
+        for (Chips chip : chips){
+            chips.add(chip);
         }
     }
     public void setAllCards(){
@@ -60,8 +78,8 @@ public class Game extends JPanel implements MouseListener {
         super.paintComponent(g);
         int cardWidth = 71;
         int cardHeight = 96;
-        int x = 50;
-        int y = 10;
+        int x = 280;
+        int y = 180;
 
         for (int i = 0; i < 5; i++) {
             if (i < field.size()) {
@@ -71,10 +89,6 @@ public class Game extends JPanel implements MouseListener {
             }
 
             x += cardWidth + 10;
-            if ((i+1) % 3 == 0) {
-                x = 50;
-                y += cardHeight + 10;
-            }
         }
         g.setFont(new Font("Courier New", Font.BOLD, 20));
         g.drawString("Check", 60, 420);
@@ -88,10 +102,18 @@ public class Game extends JPanel implements MouseListener {
         g.drawRect((int)button4.getX(), (int)button4.getY(), (int)button4.getWidth(), (int)button4.getHeight());
 
         g.drawString("1",110,325);
-        g.drawOval(100,300,30,30);
-
+        g.drawOval((int) chip1.getX(), (int) chip1.getY(), (int) chip1.getWidth(), (int) chip1.getHeight());
         g.drawString("5",155, 325);
-        g.drawOval(140,300,40,40);
+        g.drawOval((int) chip2.getX(), (int) chip2.getY(), (int) chip2.getWidth(), (int) chip2.getHeight());
+        g.drawString("25",195, 325);
+        g.drawOval((int) chip3.getX(), (int) chip3.getY(), (int) chip3.getWidth(), (int) chip3.getHeight());
+        g.drawString("100",235, 325);
+        g.drawOval((int) chip4.getX(), (int) chip4.getY(), (int) chip4.getWidth(), (int) chip4.getHeight());
+        g.drawString("500",275, 325);
+        g.drawOval((int) chip5.getX(), (int) chip5.getY(), (int) chip5.getWidth(), (int) chip5.getHeight());
+        g.drawString("1000",315, 325);
+        g.drawOval((int) chip6.getX(), (int) chip6.getY(), (int) chip6.getWidth(), (int) chip6.getHeight());
+
     }
 
     public boolean flush(ArrayList<Card> cards){

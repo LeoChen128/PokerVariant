@@ -56,7 +56,7 @@ public class Card {
         return suit + " " + value;
     }
 
-    public BufferedImage getImage() {
+    public BufferedImage getImage()  {
         return image;
     }
 
