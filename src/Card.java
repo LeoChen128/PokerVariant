@@ -64,12 +64,7 @@ public class Card {
     public BufferedImage readImage() {
         try {
             BufferedImage image;
-            if (show) {
-                image = ImageIO.read(new File(imageFileName));
-            }
-            else {
-                image = ImageIO.read(new File(backImageFileName));
-            }
+            image = ImageIO.read(new File(imageFileName));
             return image;
         }
         catch (IOException e) {

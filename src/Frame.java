@@ -8,7 +8,7 @@ public class Frame extends JFrame implements Runnable {
     public Frame(String display) {
         super(display);
         int frameWidth = 1000;
-        int frameHeight = 500;
+        int frameHeight = 600;
         p = new Game();
         this.add(p);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

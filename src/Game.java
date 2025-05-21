@@ -80,7 +80,10 @@ public class Game extends JPanel implements MouseListener {
         int cardHeight = 96;
         int x = 280;
         int y = 180;
-
+//        int width = 1000;
+//        int length = 600;
+//        Map map  = new Map();
+//        g.drawImage(map.getImage(),width,length,null);
         for (int i = 0; i < 5; i++) {
             if (i < field.size()) {
                 Card c = field.get(i);
@@ -119,7 +122,7 @@ public class Game extends JPanel implements MouseListener {
     public boolean flush(ArrayList<Card> cards) {
         int[] suits = new int[4];
         for (Card card : cards) {
-            suits[card.getSuit()]++;
+            suits[Integer.parseInt(card.getSuit())]++;
         }
         for (int i = 0; i < 4; i++) {
             if (suits[i] >= 5) {
@@ -162,31 +165,31 @@ public class Game extends JPanel implements MouseListener {
     return false;
 }
 
-public boolean threeOfKind(ArrayList<Card> cards) {
-    int[] counts = new int[15];
-    for (Card card : cards) {
-        counts[card.getNumericalValue()]++;
+    public boolean threeOfKind(ArrayList<Card> cards) {
+        int[] counts = new int[15];
+        for (Card card : cards) {
+         counts[card.getNumericalValue()]++;
+     }
+        for (int i = 2; i <= 14; i++) {
+            if (counts[i] >= 3) {
+              return true;
+          }
+     }
+        return false;
     }
-    for (int i = 2; i <= 14; i++) {
-        if (counts[i] >= 3) {
-            return true;
-        }
-    }
-    return false;
-}
 
-public boolean fourOfKind(ArrayList<Card> cards) {
-    int[] counts = new int[15];
-    for (Card card : cards) {
-        counts[card.getNumericalValue()]++;
-    }
-    for (int i = 2; i <= 14; i++) {
-        if (counts[i] >= 4) {
-            return true;
+    public boolean fourOfKind(ArrayList<Card> cards) {
+        int[] counts = new int[15];
+        for (Card card : cards) {
+            counts[card.getNumericalValue()]++;
         }
+        for (int i = 2; i <= 14; i++) {
+            if (counts[i] >= 4) {
+                return true;
+            }
+        }
+        return false;
     }
-    return false;
-}
 
 
     public void removeThreeOfKind(ArrayList<Card> cards){
@@ -220,13 +223,8 @@ public boolean fourOfKind(ArrayList<Card> cards) {
 
 
         }
-//        for (String type : types){
-//            if(type.equals("spades")) spades++;
-//            if(type.equals("diamonds")) diamonds++;
-//            if(type.equals("hearts")) hearts++;
-//            if(type.equals("clubs")) clubs++;
-//        }
     }
+
     public boolean fullHouse(ArrayList<Card> cards) {
         int[] counts = new int[15];
         boolean hasThree = false;
@@ -273,15 +271,19 @@ public boolean fourOfKind(ArrayList<Card> cards) {
         for (int suit = 0; suit < 4; suit++) {
             ArrayList<Card> suitedCards = new ArrayList<Card>();
             for (Card card : cards) {
-                if (card.getSuit() == suit) {
-                    suitedCards.add(card);
-                }
+//                if (card.getSuit() == suit) {
+//                    suitedCards.add(card);
+//                }
             }
-            if (suitedCards.size() >= 5 && isStraight(suitedCards)) {
+            if (suitedCards.size() >= 5 && straight(suitedCards)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean straight(ArrayList<Card> cards){
+        return true;
     }
 
 
