@@ -116,27 +116,19 @@ public class Game extends JPanel implements MouseListener {
 
     }
 
-    public boolean flush(ArrayList<Card> cards){
-        int spades = 0;
-        int diamonds = 0;
-        int hearts = 0;
-        int clubs = 0;
-        ArrayList<String> types = new ArrayList<>();
-        for (Card card:cards){
-            types.add(card.getSuit());
+    public boolean flush(ArrayList<Card> cards) {
+        int[] suits = new int[4];
+        for (Card card : cards) {
+            suits[card.getSuit()]++;
         }
-        for (String type : types){
-            if(type.equals("spades")) spades++;
-            if(type.equals("diamonds")) diamonds++;
-            if(type.equals("hearts")) hearts++;
-            if(type.equals("clubs")) clubs++;
+        for (int i = 0; i < 4; i++) {
+            if (suits[i] >= 5) {
+                return true;
+            }
         }
-        if (spades == 5) return true;
-        if (diamonds == 5) return true;
-        if (hearts == 5) return true;
-        if (clubs == 5) return true;
         return false;
     }
+
 
     public boolean royalFlush(ArrayList<Card> cards){
         int count = 0;
@@ -157,71 +149,45 @@ public class Game extends JPanel implements MouseListener {
         return false;
     }
 
-    public boolean fourOfKind(ArrayList<Card> cards){
-        int spades = 0;
-        int diamonds = 0;
-        int hearts = 0;
-        int clubs = 0;
-        ArrayList<String> types = new ArrayList<>();
-        for (Card card:cards){
-            types.add(card.getSuit());
-        }
-        for (String type : types){
-            if(type.equals("spades")) spades++;
-            if(type.equals("diamonds")) diamonds++;
-            if(type.equals("hearts")) hearts++;
-            if(type.equals("clubs")) clubs++;
-        }
-        if (spades == 4) return true;
-        if (diamonds == 4) return true;
-        if (hearts == 4) return true;
-        if (clubs == 4) return true;
-        return false;
+    public boolean pair(ArrayList<Card> cards) {
+    int[] counts = new int[15];
+    for (Card card : cards) {
+        counts[card.getNumericalValue()]++;
     }
+    for (int i = 2; i <= 14; i++) {
+        if (counts[i] >= 2) {
+            return true;
+        }
+    }
+    return false;
+}
 
-    public boolean threeOfKind(ArrayList<Card> cards){
-        int spades = 0;
-        int diamonds = 0;
-        int hearts = 0;
-        int clubs = 0;
-        ArrayList<String> types = new ArrayList<>();
-        for (Card card:cards){
-            types.add(card.getSuit());
-        }
-        for (String type : types){
-            if(type.equals("spades")) spades++;
-            if(type.equals("diamonds")) diamonds++;
-            if(type.equals("hearts")) hearts++;
-            if(type.equals("clubs")) clubs++;
-        }
-        if (spades == 3) return true;
-        if (diamonds == 3) return true;
-        if (hearts == 3) return true;
-        if (clubs == 3) return true;
-        return false;
+public boolean threeOfKind(ArrayList<Card> cards) {
+    int[] counts = new int[15];
+    for (Card card : cards) {
+        counts[card.getNumericalValue()]++;
     }
+    for (int i = 2; i <= 14; i++) {
+        if (counts[i] >= 3) {
+            return true;
+        }
+    }
+    return false;
+}
 
-    public boolean pair(ArrayList<Card> cards){
-        int spades = 0;
-        int diamonds = 0;
-        int hearts = 0;
-        int clubs = 0;
-        ArrayList<String> types = new ArrayList<>();
-        for (Card card:cards){
-            types.add(card.getSuit());
-        }
-        for (String type : types){
-            if(type.equals("spades")) spades++;
-            if(type.equals("diamonds")) diamonds++;
-            if(type.equals("hearts")) hearts++;
-            if(type.equals("clubs")) clubs++;
-        }
-        if (spades == 2) return true;
-        if (diamonds == 2) return true;
-        if (hearts == 2) return true;
-        if (clubs == 2) return true;
-        return false;
+public boolean fourOfKind(ArrayList<Card> cards) {
+    int[] counts = new int[15];
+    for (Card card : cards) {
+        counts[card.getNumericalValue()]++;
     }
+    for (int i = 2; i <= 14; i++) {
+        if (counts[i] >= 4) {
+            return true;
+        }
+    }
+    return false;
+}
+
 
     public void removeThreeOfKind(ArrayList<Card> cards){
         int spades = 0;
@@ -261,18 +227,63 @@ public class Game extends JPanel implements MouseListener {
 //            if(type.equals("clubs")) clubs++;
 //        }
     }
-//    public boolean fullHouse(ArrayList<Card> cards){
-//
-//    }
+    public boolean fullHouse(ArrayList<Card> cards) {
+        int[] counts = new int[15];
+        boolean hasThree = false;
+        boolean hasPair = false;
+    
+        for (Card card : cards) {
+            counts[card.getNumericalValue()]++;
+        }
+
+        for (int i = 2; i <= 14; i++) {
+            if (counts[i] >= 3) {
+                hasThree = true;
+                counts[i] -= 3;
+                break;
+            }
+        }
+
+        for (int i = 2; i <= 14; i++) {
+            if (counts[i] >= 2) {
+                hasPair = true;
+                break;
+            }
+        }
+
+        return hasThree && hasPair;
+    }
 
 
-//    public boolean twoPair(ArrayList<Card> cards){
-//
-//    }
+    public boolean twoPair(ArrayList<Card> cards) {
+        int[] counts = new int[15];
+        int pairCount = 0;
+        for (Card card : cards) {
+            counts[card.getNumericalValue()]++;
+        }
+        for (int i = 2; i <= 14; i++) {
+            if (counts[i] >= 2) {
+                pairCount++;
+            }
+        }
+        return pairCount >= 2;
+    }
+    
+    public boolean straightFlush(ArrayList<Card> cards) {
+        for (int suit = 0; suit < 4; suit++) {
+            ArrayList<Card> suitedCards = new ArrayList<Card>();
+            for (Card card : cards) {
+                if (card.getSuit() == suit) {
+                    suitedCards.add(card);
+                }
+            }
+            if (suitedCards.size() >= 5 && isStraight(suitedCards)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-//    public boolean straightFlush(ArrayList<Card> cards){
-//
-//    }
 
     public void removeDuplicates(ArrayList<Card> cards){
         ArrayList<Integer> numberCards = new ArrayList<>();
