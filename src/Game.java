@@ -80,11 +80,12 @@ public class Game extends JPanel implements MouseListener {
         int cardHeight = 96;
         int x = 280;
         int y = 180;
-//        int width = 1000;
-//        int length = 600;
-//        Map map  = new Map();
-//        g.drawImage(map.getImage(),width,length,null);
-        for (int i = 0; i < 5; i++) {
+        int width = 1000;
+        int length = 600;
+        Map map  = new Map();
+        g.drawImage(map.getImage(),width,length,null);
+
+        for (int i = 0; i < 3; i++) {
             if (i < field.size()) {
                 Card c = field.get(i);
                 c.setRectangleLocation(x, y);
@@ -93,6 +94,8 @@ public class Game extends JPanel implements MouseListener {
 
             x += cardWidth + 10;
         }
+
+
         g.setFont(new Font("Courier New", Font.BOLD, 20));
         g.drawString("Check", 60, 420);
         g.drawRect((int)button.getX(), (int)button.getY(), (int)button.getWidth(), (int)button.getHeight());
