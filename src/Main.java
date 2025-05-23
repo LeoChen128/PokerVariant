@@ -1,5 +1,6 @@
 import javax.swing.*;
-import java.awt.Dimension;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 public class Main {
     public static void main(String[] args) {
 //        JFrame f = new JFrame("Poker");
@@ -12,5 +13,13 @@ public class Main {
 //        frame.getContentPane().add(map);
 //        frame.pack();
 //        frame.setVisible(true);
+        ImageIcon picture = new ImageIcon("field/map.png");
+        JFrame f = new JFrame("Poker");
+        Map image = new Map(picture.getImage());
+        f.setSize(1000, 800);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.add(image);
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
     }
 }

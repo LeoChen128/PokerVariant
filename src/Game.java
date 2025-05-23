@@ -1,6 +1,6 @@
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -45,6 +45,13 @@ public class Game extends JPanel implements MouseListener {
         allCards = new ArrayList<>();
         field = new ArrayList<>();
         placeField();
+        JButton jb1 = new JButton();
+        JButton jb2 = new JButton();
+        JButton jb3 = new JButton();
+        JButton jb4 = new JButton();
+        JButton jb5 = new JButton();
+        JButton jb6 = new JButton();
+        JButton jb7 = new JButton();
     }
 
     public void placeField(){
@@ -70,10 +77,7 @@ public class Game extends JPanel implements MouseListener {
             allCards.add(card);
         }
     }
-    public int getDiameter(){
-        int diameter = Math.min(getWidth(), getHeight());
-        return diameter;
-    }
+
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         int cardWidth = 71;
@@ -82,8 +86,8 @@ public class Game extends JPanel implements MouseListener {
         int y = 180;
         int width = 1000;
         int length = 600;
-        Map map  = new Map();
-        g.drawImage(map.getImage(),width,length,null);
+//        Map map  = new Map();
+//        g.drawImage(map.getImage(),width,length,null);
 
         for (int i = 0; i < 3; i++) {
             if (i < field.size()) {
@@ -313,6 +317,11 @@ public class Game extends JPanel implements MouseListener {
         return 1;
     }
 
+    public boolean greater(){
+
+
+        return true;
+    }
 
     public Integer highcard(ArrayList<Card> cards){
         int highestValue = 0;

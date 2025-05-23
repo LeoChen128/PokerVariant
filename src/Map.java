@@ -9,9 +9,9 @@ public class Map extends JPanel {
 
     private Image image;
 
-    public Map(){
+    public Map(Image image){
         ImageIcon picture = new ImageIcon("field/map.png");
-        image = picture.getImage();
+        this.image = picture.getImage();
 //        try {
 //            image = ImageIO.read(new File(imageFileName));
 //        }
@@ -31,15 +31,5 @@ public class Map extends JPanel {
     public BufferedImage getImage(){
         return (BufferedImage) image;
     }
-    public static void main(String[] args) {
-        JFrame f = new JFrame("Poker");
-        Map image = new Map();
-        f.setSize(1000, 800);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(image);
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
-    }
-
 
 }
