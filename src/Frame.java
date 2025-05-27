@@ -1,4 +1,5 @@
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
 
 public class Frame extends JFrame implements Runnable {
 
@@ -28,5 +29,8 @@ public class Frame extends JFrame implements Runnable {
         while (true) {
             p.repaint();
         }
+    }
+
+    public void add(BufferedImage image) {
     }
 }

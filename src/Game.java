@@ -1,8 +1,12 @@
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.Font;
 import java.awt.geom.Ellipse2D;
@@ -86,9 +90,23 @@ public class Game extends JPanel implements MouseListener {
         int y = 180;
         int width = 1000;
         int length = 600;
-//        Map map  = new Map();
-//        g.drawImage(map.getImage(),width,length,null);
 
+//        Frame f = new Frame("Poker");
+//        Map map = new Map()
+//        BufferedImage image = null;
+//        try {
+//
+//            f.add(image);
+//        }
+//        catch (IOException e) {
+//            System.out.println(e);
+//        }
+//        f.setSize(1000, 800);
+//        f.setDefaultCloseOperation(Frame.EXIT_ON_CLOSE);
+//        f.add(image);
+//        f.setLocationRelativeTo(null);
+//        f.setVisible(true);
+        
         for (int i = 0; i < 3; i++) {
             if (i < field.size()) {
                 Card c = field.get(i);
