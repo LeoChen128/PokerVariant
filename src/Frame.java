@@ -30,7 +30,10 @@ public class Frame extends JFrame implements Runnable {
             p.repaint();
         }
     }
+//
+//    public void add(BufferedImage image) {
+//    }
 
-    public void add(BufferedImage image) {
+    public void add(ImageIcon image) {
     }
 }

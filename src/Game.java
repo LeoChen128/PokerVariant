@@ -1,14 +1,12 @@
+import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.awt.Font;
 import java.awt.geom.Ellipse2D;
 
 public class Game extends JPanel implements MouseListener {
@@ -82,6 +80,17 @@ public class Game extends JPanel implements MouseListener {
         }
     }
 
+    public static void main(String[] args) {
+        Frame f = new Frame("Poker");
+        ImageIcon image = new ImageIcon("field/map.png");
+        f.add(image);
+        f.setSize(1000, 800);
+        f.setDefaultCloseOperation(Frame.EXIT_ON_CLOSE);
+        f.add(image);
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
+    }
+
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         int cardWidth = 71;
@@ -91,21 +100,7 @@ public class Game extends JPanel implements MouseListener {
         int width = 1000;
         int length = 600;
 
-//        Frame f = new Frame("Poker");
-//        Map map = new Map()
-//        BufferedImage image = null;
-//        try {
-//
-//            f.add(image);
-//        }
-//        catch (IOException e) {
-//            System.out.println(e);
-//        }
-//        f.setSize(1000, 800);
-//        f.setDefaultCloseOperation(Frame.EXIT_ON_CLOSE);
-//        f.add(image);
-//        f.setLocationRelativeTo(null);
-//        f.setVisible(true);
+
         
         for (int i = 0; i < 3; i++) {
             if (i < field.size()) {
