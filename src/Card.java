@@ -13,6 +13,8 @@ public class Card {
     private boolean show;
     private BufferedImage image;
     private Rectangle cardBox;
+    private ArrayList<Card> deck;
+
 
     public Card(String suit, String value) {
         this.suit = suit;
@@ -22,6 +24,7 @@ public class Card {
         this.backImageFileName = "images/card_back.png";
         this.image = readImage();
         this.cardBox = new Rectangle(-100, -100, image.getWidth(), image.getHeight());
+        this.deck = new ArrayList<Card>();
     }
 
     public Rectangle getCardBox() {
@@ -73,8 +76,7 @@ public class Card {
         }
     }
 
-    public static ArrayList<Card> buildDeck() {
-        ArrayList<Card> deck = new ArrayList<Card>();
+    public ArrayList<Card> buildDeck() {
         String[] suits = {"clubs", "diamonds", "hearts", "spades"};
         String[] values = {"02", "03", "04", "05", "06", "07", "08", "09", "10", "A", "J", "K", "Q"};
         for (String s : suits) {
@@ -85,4 +87,11 @@ public class Card {
         }
         return deck;
     }
+    public Card draw() {
+        if (deck.size() > 0) {
+            return deck.remove(deck.size() - 1);
+        }
+        return null;
+    }
+
 }

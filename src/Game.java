@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.geom.Ellipse2D;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Game extends JPanel implements MouseListener {
 
@@ -42,7 +44,7 @@ public class Game extends JPanel implements MouseListener {
         chip7 = new Ellipse2D.Double(340,300,30,30);
         chips = new ArrayList<>();
         this.addMouseListener(this);
-        deck = Card.buildDeck();
+//        deck = Card.buildDeck();
         hand = new ArrayList<>();
         allCards = new ArrayList<>();
         field = new ArrayList<>();
@@ -80,28 +82,12 @@ public class Game extends JPanel implements MouseListener {
         }
     }
 
-    public static void main(String[] args) {
-        Frame f = new Frame("Poker");
-        ImageIcon image = new ImageIcon("field/map.png");
-        f.add(image);
-        f.setSize(1000, 800);
-        f.setDefaultCloseOperation(Frame.EXIT_ON_CLOSE);
-        f.add(image);
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
-    }
-
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         int cardWidth = 71;
-        int cardHeight = 96;
         int x = 280;
         int y = 180;
-        int width = 1000;
-        int length = 600;
 
-
-        
         for (int i = 0; i < 3; i++) {
             if (i < field.size()) {
                 Card c = field.get(i);
@@ -284,7 +270,12 @@ public class Game extends JPanel implements MouseListener {
                 pairCount++;
             }
         }
-        return pairCount >= 2;
+        if (pairCount >= 2){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     
     public boolean straightFlush(ArrayList<Card> cards) {
@@ -303,6 +294,25 @@ public class Game extends JPanel implements MouseListener {
     }
 
     public boolean straight(ArrayList<Card> cards){
+        boolean straight = false;
+        int count = 0;
+        ArrayList<Integer> values = new ArrayList<>();
+        for (Card card : cards){
+            values.add(card.getNumericalValue());
+        }
+        Collections.sort(values);
+        for (Integer value : values){
+            if(value == 14) count++;
+            if(value == 13) count++;
+            if(value == 12) count++;
+            if(value == 11) count++;
+            if(value == 10) count++;
+        }
+
+
+        if (count == 5 || straight){
+            return true;
+        }
         return true;
     }
 
@@ -321,7 +331,7 @@ public class Game extends JPanel implements MouseListener {
         if (royalFlush(allCards)) return 10;
         //if (straightFLush(allCards)) return 9;
         if (fourOfKind(allCards)) return 8;
-//        if (fullHouse(allCards)) return 7;
+        if (fullHouse(allCards)) return 7;
         if (flush(allCards)) return 6;
 //        if (straight(allCards)) return 5;
         if (threeOfKind(allCards)) return 4;
@@ -375,5 +385,31 @@ public class Game extends JPanel implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
+
+    public static void main(String[] args) {
+        Frame f = new Frame("Poker");
+        ImageIcon image = new ImageIcon("field/map.png");
+        f.add(image);
+        f.setSize(1000, 800);
+        f.setDefaultCloseOperation(Frame.EXIT_ON_CLOSE);
+        f.add(image);
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
+
+        ArrayList<Card> deck = new ArrayList<Card>();
+        Collections.shuffle(deck);
+
+        boolean userTurn = false;
+        boolean dealtCard = false;
+        boolean nextTurn = false;
+        boolean game = true;
+
+        while (game){
+            userTurn = true;
+
+        }
+    }
+
 }
 
