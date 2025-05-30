@@ -1,5 +1,4 @@
 public class Balance {
-
     private int balance;
 
     public Balance() {
@@ -10,24 +9,17 @@ public class Balance {
         return balance;
     }
 
+    public boolean canDeduct(int amount) {
+        return balance >= amount;
+    }
+
     public void deduct(int amount) {
-        if (balance < amount) {
-            System.out.println("You don't have enough cash!");
-        } else {
+        if (balance >= amount) {
             balance -= amount;
         }
     }
 
-   
-    public void redChip() {
-        deduct(50);
-    }
-
-    public void greenChip() {
-        deduct(20);
-    }
-
-    public void blackChip() {
-        deduct(100);
+    public void add(int amount) {
+        balance += amount;
     }
 }
