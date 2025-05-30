@@ -18,10 +18,7 @@ public class Balance {
         }
     }
 
-    public void whiteChip() {
-        deduct(1);
-    }
-
+   
     public void redChip() {
         deduct(5);
     }
@@ -32,13 +29,5 @@ public class Balance {
 
     public void blackChip() {
         deduct(100);
-    }
-
-    public void purpleChip() {
-        deduct(500);
-    }
-
-    public void yellowChip() {
-        deduct(1000);
     }
 }
