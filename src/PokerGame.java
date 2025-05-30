@@ -18,7 +18,6 @@ public class PokerGame extends JPanel implements MouseListener {
     private boolean gameActive;
     private int raiseAmount;
 
-    // Individual Rectangle objects for buttons
     private Rectangle checkButton;
     private Rectangle callButton;
     private Rectangle raiseButton;
@@ -56,20 +55,20 @@ public class PokerGame extends JPanel implements MouseListener {
     }
 
     public void setupButtons() {
-        // Action buttons positioned better and larger for visibility
+        //representation of the buttons (call, check, raise, fold)
         checkButton = new Rectangle(50, 650, 100, 40);
         callButton = new Rectangle(160, 650, 100, 40);
         raiseButton = new Rectangle(270, 650, 100, 40);
         foldButton = new Rectangle(380, 650, 100, 40);
 
-        // Chip selection buttons
+        //chips
         chip20Button = new Rectangle(50, 700, 60, 40);
         chip50Button = new Rectangle(120, 700, 60, 40);
         chip100Button = new Rectangle(190, 700, 60, 40);
     }
 
     public void startNewHand() {
-        deck = Card.buildDeck(); // Using your Card.buildDeck() method
+        deck = Card.buildDeck();
 
         for (Player p : players) {
             p.resetForNewHand();
@@ -116,13 +115,13 @@ public class PokerGame extends JPanel implements MouseListener {
         resetBetting();
 
         if (gamePhase.equals("preflop")) {
-            dealCommunityCards(3); // Flop
+            dealCommunityCards(3);
             gamePhase = "flop";
         } else if (gamePhase.equals("flop")) {
-            dealCommunityCards(1); // Turn
+            dealCommunityCards(1);
             gamePhase = "turn";
         } else if (gamePhase.equals("turn")) {
-            dealCommunityCards(1); // River
+            dealCommunityCards(1);
             gamePhase = "river";
         } else if (gamePhase.equals("river")) {
             determineWinner();
@@ -199,7 +198,6 @@ public class PokerGame extends JPanel implements MouseListener {
             }
         } else {
             if (action == 0) {
-                // Check - do nothing
             } else if (action == 1 && npc.getBalance().canDeduct(bigBlind)) {
                 npc.bet(bigBlind);
                 potSize += bigBlind;
@@ -330,7 +328,7 @@ public class PokerGame extends JPanel implements MouseListener {
         drawButton(g, chip100Button, "$100", raiseAmount == 100 ? Color.CYAN : Color.LIGHT_GRAY);
     }
 
-    private void drawButton(Graphics g, Rectangle button, String text, Color backgroundColor) {
+    public void drawButton(Graphics g, Rectangle button, String text, Color backgroundColor) {
         g.setColor(backgroundColor);
         g.fillRect(button.x, button.y, button.width, button.height);
 
@@ -386,17 +384,14 @@ public class PokerGame extends JPanel implements MouseListener {
         Point p = e.getPoint();
 
         if (checkButton.contains(p) && currentBet == user.getCurrentBet()) {
-            // Check - no additional bet needed
             nextPlayer();
         } else if (callButton.contains(p) && currentBet > user.getCurrentBet()) {
-            // Call - match the current bet
             int callAmount = currentBet - user.getCurrentBet();
             if (user.getBalance().canDeduct(callAmount) && user.bet(callAmount)) {
                 potSize += callAmount;
                 nextPlayer();
             }
         } else if (raiseButton.contains(p)) {
-            // Raise - call current bet plus raise amount
             int callAmount = currentBet - user.getCurrentBet();
             int totalBet = callAmount + raiseAmount;
             if (user.getBalance().canDeduct(totalBet) && user.bet(totalBet)) {
@@ -405,7 +400,6 @@ public class PokerGame extends JPanel implements MouseListener {
                 nextPlayer();
             }
         } else if (foldButton.contains(p)) {
-            // Fold - give up hand
             user.fold();
             nextPlayer();
         } else if (chip20Button.contains(p)) {

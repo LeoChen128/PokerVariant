@@ -43,7 +43,8 @@ public class HandEvaluator {
         for (Card card : cards) {
             counts[card.getNumericalValue()]++;
         }
-        boolean hasThree = false, hasPair = false;
+        boolean hasThree = false;
+        boolean hasPair = false;
         for (int count : counts) {
             if (count >= 3) hasThree = true;
             if (count >= 2 && count != 3) hasPair = true;
