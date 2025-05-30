@@ -20,11 +20,11 @@ public class Balance {
 
    
     public void redChip() {
-        deduct(5);
+        deduct(50);
     }
 
     public void greenChip() {
-        deduct(25);
+        deduct(20);
     }
 
     public void blackChip() {
