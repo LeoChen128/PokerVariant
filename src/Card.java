@@ -1,5 +1,8 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,30 +10,28 @@ public class Card {
     private String suit;
     private String value;
     private String imageFileName;
-    private boolean show;
     private BufferedImage image;
     private Rectangle cardBox;
 
     public Card(String suit, String value) {
         this.suit = suit;
         this.value = value;
-        this.imageFileName = "images/card_" + suit + "_" + value + ".png";
-        this.show = true;
+        this.imageFileName = "images/card_"+suit+"_"+value+".png";
         this.cardBox = new Rectangle(-100, -100, 71, 96);
-        loadDefaultImage();
+        this.image = readImage();
     }
 
-    public void loadDefaultImage() {
-        image = new BufferedImage(71, 96, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = image.createGraphics();
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, 71, 96);
-        g2d.setColor(Color.BLACK);
-        g2d.drawRect(0, 0, 70, 95);
-        g2d.setFont(new Font("Arial", Font.BOLD, 12));
-        g2d.drawString(value, 5, 20);
-        g2d.drawString(suit, 5, 40);
-        g2d.dispose();
+
+    public BufferedImage readImage() {
+        try {
+            BufferedImage image;
+            image = ImageIO.read(new File(imageFileName));
+            return image;
+        }
+        catch (IOException e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     public String getSuit() { return suit; }

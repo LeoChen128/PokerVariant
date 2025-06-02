@@ -3,7 +3,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.util.ArrayList;
-
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 public class PokerGame extends JPanel implements MouseListener {
     private ArrayList<Player> players;
     private ArrayList<Card> deck;
@@ -104,6 +106,7 @@ public class PokerGame extends JPanel implements MouseListener {
             }
         }
     }
+
 
     public void dealCommunityCards(int count) {
         for (int i = 0; i < count && deck.size() > 0; i++) {
@@ -275,16 +278,18 @@ public class PokerGame extends JPanel implements MouseListener {
             if (i < communityCards.size()) {
                 Card card = communityCards.get(i);
                 card.setRectangleLocation(x, y);
-                // Use the card's image rendering
                 g.drawImage(card.getImage(), x, y, null);
-            } else {
-                // Draw empty card slot
+            }
+            else {
                 g.setColor(Color.GRAY);
                 g.fillRect(x, y, 71, 96);
                 g.setColor(Color.BLACK);
                 g.drawRect(x, y, 71, 96);
             }
             x += 80;
+        }
+        for (Card communityCard : communityCards) {
+            System.out.println(communityCard);
         }
     }
 
@@ -298,7 +303,6 @@ public class PokerGame extends JPanel implements MouseListener {
         int y = 420;
         for (Card card : user.getHand()) {
             card.setRectangleLocation(x, y);
-            // Use the card's image rendering
             g.drawImage(card.getImage(), x, y, null);
             x += 80;
         }
@@ -427,5 +431,8 @@ public class PokerGame extends JPanel implements MouseListener {
         frame.setSize(1000, 800);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        Color darkBrown = new Color(51, 18, 0, 255);
+        Border border = BorderFactory.createLineBorder(darkBrown, 10);
+
     }
 }
