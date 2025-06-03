@@ -53,6 +53,7 @@ public class PokerGame extends JPanel implements MouseListener {
         gameActive = false;
         raiseAmount = 50;
 
+
         startNewHand();
     }
 
@@ -194,14 +195,18 @@ public class PokerGame extends JPanel implements MouseListener {
         if (currentBet > npc.getCurrentBet()) {
             if (action == 0 || !npc.getBalance().canDeduct(currentBet - npc.getCurrentBet())) {
                 npc.fold();
-            } else {
+            }
+            else {
                 int callAmount = currentBet - npc.getCurrentBet();
                 npc.bet(callAmount);
                 potSize += callAmount;
+
             }
-        } else {
+        }
+        else {
             if (action == 0) {
-            } else if (action == 1 && npc.getBalance().canDeduct(bigBlind)) {
+            }
+            else if (action == 1 && npc.getBalance().canDeduct(bigBlind)) {
                 npc.bet(bigBlind);
                 potSize += bigBlind;
                 currentBet = Math.max(currentBet, npc.getCurrentBet());
@@ -259,7 +264,7 @@ public class PokerGame extends JPanel implements MouseListener {
         // Green poker table background
         g.setColor(new Color(0, 128, 0));
         g.fillRect(0, 0, getWidth(), getHeight());
-
+        nextPhase();
         drawCommunityCards(g);
         drawPlayerCards(g);
         drawButtons(g);
@@ -274,6 +279,7 @@ public class PokerGame extends JPanel implements MouseListener {
 
         int x = 300;
         int y = 70;
+        System.out.println(communityCards.size());
         for (int i = 0; i < 5; i++) {
             if (i < communityCards.size()) {
                 Card card = communityCards.get(i);
@@ -425,14 +431,23 @@ public class PokerGame extends JPanel implements MouseListener {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Texas Hold'em Poker");
         PokerGame game = new PokerGame();
-
+//        Color darkBrown = new Color(51, 18, 0, 255);
+//        Color white = new Color(0xFFFFFFFF, true);
+//        Color red = new Color(0xFFFF0000, true);
+//        Color black = new Color(0xFF000000, true);
+//        JPanel panel = new JPanel();
+//        panel.setBorder(BorderFactory.createLineBorder(darkBrown, 5));
+//        frame.getContentPane().add(panel);
         frame.add(game);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 800);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        Color darkBrown = new Color(51, 18, 0, 255);
-        Border border = BorderFactory.createLineBorder(darkBrown, 10);
+
+
+
+
+
 
     }
 }
