@@ -17,15 +17,37 @@ public class Player {
         this.isUser = isUser;
     }
 
-    public String getName() { return name; }
-    public ArrayList<Card> getHand() { return hand; }
-    public Balance getBalance() { return balance; }
-    public int getCurrentBet() { return currentBet; }
-    public boolean isFolded() { return folded; }
-    public boolean isUser() { return isUser; }
+    public String getName() {
+        return name;
+    }
 
-    public void addCard(Card card) { hand.add(card); }
-    public void clearHand() { hand.clear(); }
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
+
+    public Balance getBalance() {
+        return balance;
+    }
+
+    public int getCurrentBet() {
+        return currentBet;
+    }
+
+    public boolean isFolded() {
+        return folded;
+    }
+
+    public boolean isUser() {
+        return isUser;
+    }
+
+    public void addCard(Card card) {
+        hand.add(card);
+    }
+
+    public void clearHand() {
+        hand.clear();
+    }
 
     public boolean bet(int amount) {
         if (balance.canDeduct(amount)) {
@@ -36,12 +58,14 @@ public class Player {
         return false;
     }
 
-    public void fold() { folded = true; }
+    public void fold() {
+        folded = true;
+    }
 
     public void resetForNewHand() {
         clearHand();
         currentBet = 0;
-        folded = false;
+//        folded = false;
     }
 
     public void resetCurrentBet() {

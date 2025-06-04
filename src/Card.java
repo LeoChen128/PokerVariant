@@ -16,7 +16,7 @@ public class Card {
     public Card(String suit, String value) {
         this.suit = suit;
         this.value = value;
-        this.imageFileName = "images/card_"+suit+"_"+value+".png";
+        this.imageFileName = "images/card_" + suit + "_" + value + ".png";
         this.cardBox = new Rectangle(-100, -100, 71, 96);
         this.image = readImage();
     }
@@ -27,18 +27,31 @@ public class Card {
             BufferedImage image;
             image = ImageIO.read(new File(imageFileName));
             return image;
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
             return null;
         }
     }
 
-    public String getSuit() { return suit; }
-    public String getValue() { return value; }
-    public BufferedImage getImage() { return image; }
-    public Rectangle getCardBox() { return cardBox; }
-    public void setRectangleLocation(int x, int y) { cardBox.setLocation(x, y); }
+    public String getSuit() {
+        return suit;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public Rectangle getCardBox() {
+        return cardBox;
+    }
+
+    public void setRectangleLocation(int x, int y) {
+        cardBox.setLocation(x, y);
+    }
 
     public int getNumericalValue() {
         if (value.equals("A")) return 14;

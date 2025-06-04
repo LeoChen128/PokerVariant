@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+
 public class PokerGame extends JPanel implements MouseListener {
     private ArrayList<Player> players;
     private ArrayList<Card> deck;
@@ -190,23 +191,20 @@ public class PokerGame extends JPanel implements MouseListener {
 
     public void handleNPCAction() {
         Player npc = players.get(currentPlayerIndex);
-        int action = (int)(Math.random() * 3);
+        int action = (int) (Math.random() * 3);
 
         if (currentBet > npc.getCurrentBet()) {
             if (action == 0 || !npc.getBalance().canDeduct(currentBet - npc.getCurrentBet())) {
                 npc.fold();
-            }
-            else {
+            } else {
                 int callAmount = currentBet - npc.getCurrentBet();
                 npc.bet(callAmount);
                 potSize += callAmount;
 
             }
-        }
-        else {
+        } else {
             if (action == 0) {
-            }
-            else if (action == 1 && npc.getBalance().canDeduct(bigBlind)) {
+            } else if (action == 1 && npc.getBalance().canDeduct(bigBlind)) {
                 npc.bet(bigBlind);
                 potSize += bigBlind;
                 currentBet = Math.max(currentBet, npc.getCurrentBet());
@@ -219,13 +217,18 @@ public class PokerGame extends JPanel implements MouseListener {
         });
         timer.setRepeats(false);
         timer.start();
+
     }
+
 
     public void determineWinner() {
         ArrayList<Player> activePlayers = new ArrayList<Player>();
         for (Player p : players) {
             if (!p.isFolded()) {
                 activePlayers.add(p);
+            }
+            else{
+                activePlayers.remove(p);
             }
         }
 
@@ -285,8 +288,7 @@ public class PokerGame extends JPanel implements MouseListener {
                 Card card = communityCards.get(i);
                 card.setRectangleLocation(x, y);
                 g.drawImage(card.getImage(), x, y, null);
-            }
-            else {
+            } else {
                 g.setColor(Color.GRAY);
                 g.fillRect(x, y, 71, 96);
                 g.setColor(Color.BLACK);
@@ -315,7 +317,8 @@ public class PokerGame extends JPanel implements MouseListener {
     }
 
     public void drawButtons(Graphics g) {
-        if (!gameActive || !players.get(currentPlayerIndex).isUser()) return;
+        if (!gameActive && !players.get(currentPlayerIndex).isUser()) return;
+        System.out.println(players.get(currentPlayerIndex).isFolded());
 
         Player user = players.get(0);
         boolean canCheck = (currentBet == user.getCurrentBet());
@@ -388,7 +391,7 @@ public class PokerGame extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (!gameActive || !players.get(currentPlayerIndex).isUser()) return;
+        if (!gameActive && !players.get(currentPlayerIndex).isUser()) return;
 
         Player user = players.get(0);
         Point p = e.getPoint();
@@ -423,10 +426,21 @@ public class PokerGame extends JPanel implements MouseListener {
         repaint();
     }
 
-    @Override public void mousePressed(MouseEvent e) {}
-    @Override public void mouseReleased(MouseEvent e) {}
-    @Override public void mouseEntered(MouseEvent e) {}
-    @Override public void mouseExited(MouseEvent e) {}
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Texas Hold'em Poker");
@@ -443,10 +457,6 @@ public class PokerGame extends JPanel implements MouseListener {
         frame.setSize(1000, 800);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
-
-
-
 
 
     }
