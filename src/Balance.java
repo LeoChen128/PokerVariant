@@ -2,7 +2,7 @@ public class Balance {
     private int balance;
 
     public Balance() {
-        this.balance = 200;
+        this.balance = 2000;
     }
 
     public int getBalance() {

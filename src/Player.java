@@ -65,7 +65,8 @@ public class Player {
     public void resetForNewHand() {
         clearHand();
         currentBet = 0;
-//        folded = false;
+        folded = false;
+        //when new hand, go back to false
     }
 
     public void resetCurrentBet() {

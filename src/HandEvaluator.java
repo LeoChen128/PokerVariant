@@ -46,8 +46,11 @@ public class HandEvaluator {
         boolean hasThree = false;
         boolean hasPair = false;
         for (int count : counts) {
-            if (count >= 3) hasThree = true;
-            if (count >= 2 && count != 3) hasPair = true;
+            if (count >= 3) {
+                hasThree = true;
+            } else if (count >= 2) {
+                hasPair = true;
+            }
         }
         return hasThree && hasPair;
     }
