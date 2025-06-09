@@ -3,6 +3,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.util.ArrayList;
+import javax.swing.border.Border;
 
 public class PokerGame extends JPanel implements MouseListener {
     private ArrayList<Player> players;
@@ -303,7 +304,11 @@ public class PokerGame extends JPanel implements MouseListener {
         super.paintComponent(g);
         g.setColor(new Color(0, 128, 0));
         g.fillRect(0, 0, getWidth(), getHeight());
-
+        Color color = new Color(0x6A2207);
+        Container panel = getRootPane().getContentPane();
+        Border border = BorderFactory.createLineBorder(color,5);
+        Border empty = BorderFactory.createEmptyBorder(10,10,10,10);
+//        panel.setBorder
         drawCommunityCards(g);
         drawPlayerCards(g);
         drawNPCCards(g);
@@ -516,7 +521,8 @@ public class PokerGame extends JPanel implements MouseListener {
 
         for (int i = 1; i < players.size(); i++) {
             Player p = players.get(i);
-            int x, y;
+            int x;
+            int y;
 
             if (i == 1) {
                 x = 900;
