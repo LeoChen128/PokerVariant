@@ -436,7 +436,7 @@ public class PokerGame extends JPanel implements MouseListener {
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 14));
-        g.drawString("Raise Amount:", 50, 690);
+        g.drawString("Raise Amount:", 50, 710);
 
         Color chip20Color = Color.LIGHT_GRAY;
         if (raiseAmount == 20) {
