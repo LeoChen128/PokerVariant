@@ -305,10 +305,10 @@ public class PokerGame extends JPanel implements MouseListener {
         g.setColor(new Color(0, 128, 0));
         g.fillRect(0, 0, getWidth(), getHeight());
         Color color = new Color(0x6A2207);
-        Container panel = getRootPane().getContentPane();
-        Border border = BorderFactory.createLineBorder(color,5);
-        Border empty = BorderFactory.createEmptyBorder(10,10,10,10);
-//        panel.setBorder
+//        Container panel = getRootPane().getContentPane();
+//        Border border = BorderFactory.createLineBorder(color,5);
+//        Border empty = BorderFactory.createEmptyBorder(10,10,10,10);
+////        panel.setBorder
         drawCommunityCards(g);
         drawPlayerCards(g);
         drawNPCCards(g);
